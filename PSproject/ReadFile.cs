@@ -5,42 +5,42 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace PSproject
+
+public class FileReader
 {
-    public class FileReader
+    public List<Staff> ReadFile()
     {
-        public List<Staff> ReadFile()
-        {
-            public List<Staff> myStaff = new List<Staff>();
+        List<Staff> myStaff = new List<Staff>();
         string[] result = new string[2];
         string path = "staff.txt";
-        string[] separator = { "," };
-            if (File.Exists(path))
+        char[] separator = { ',' };
+        if (File.Exists(path))
+        {
+            using (StreamReader sr = new StreamReader(path))
             {
-                using (StreamReader sr = new StreamReader(path))
+                while (sr.EndOfStream != true)
                 {
-                    while (sr.EndOfStream != true)
+                    result = sr.ReadLine().Split(separator, StringSplitOptions.RemoveEmptyEntries);
+                    Console.WriteLine(result[0], result[1]);
+                    if (result[1] == "Manager")
                     {
-
-                        result = sr.ReadLine().Split(separator);
-        Console.WriteLine(result[0], result[1]);
-                        if (result[1] == "Manager")
-                        {
-                            Manager manager = new Manager();
-    }
-                        if (result[1] == "Admin")
-                        {
-                            myStaff.Add[result[0]];
-                        }
-sr.Close();
+                        myStaff.Add(new Manager(result[0]));
                     }
+                    if (result[1] == "Admin")
+                    {
+                        myStaff.Add(new Admin(result[0]));
+                    }
+                    sr.Close();
                 }
             }
-            else
-            {
-                Console.WriteLine("The file does not exist.");
-            }
+            return myStaff;
+        }
+        else
+        {
+            Console.WriteLine("The file does not exist.");
         }
     }
 
 }
+
+

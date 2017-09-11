@@ -79,7 +79,7 @@ public class Staff
 public class Manager : Staff
 {
 
-    private const float mangerHourlyRate = 50f;
+    private const float managerHourlyRate = 50f;
     public int Allowance
     {
         get
@@ -91,7 +91,7 @@ public class Manager : Staff
             Allowance = value;
         }
     }
-    public Manager(string Name): base(name, managerHourlyRate)
+    public Manager(string name) : base(name, managerHourlyRate)
     {
     }
     public override void CalculatePay()
@@ -134,18 +134,13 @@ public class Admin : Staff
         base.CalculatePay();
         if (HoursWorked > 160)
         {
-            Allowance = 1000;
-            TotalPay += Allowance;
-        }
-        if (HoursWorked > 160)
-        {
             Overtime = overtimeRate * (HoursWorked - 160);
-            TotalPay += OverTime;
+            TotalPay += Overtime;
         }
     }
     public override String ToString()
     {
-        return string.Format("[Administrater: TotalPay={0}, BasicPay={1}, NameOfStaff={2}, HoursWorked={3}, Overtime={4}]", TotalPay, BasicPay, NameOfStaff, HoursWorked, Overtime);
+        return string.Format("Administrater: TotalPay={0}, BasicPay={1}, NameOfStaff={2}, HoursWorked={3}, Overtime={4}", TotalPay, BasicPay, NameOfStaff, HoursWorked, Overtime);
     }
 }
 
